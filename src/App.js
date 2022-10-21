@@ -2,8 +2,9 @@ import './App.css';
 import ApiTestComponent from './ApiTestComponent';
 import Topbar from './components/topbar/Topbar';
 import Sidebar from './components/sidebar/Sidebar';
-import Home from './pages/home/Home';
-import Order from './pages/order/Order'
+import Order from './pages/order/Order';
+import OrderList from './pages/orderList/OrderList';
+import MenuManagement from './pages/menuManagement/MenuManagement';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
 function App() {
@@ -24,11 +25,15 @@ function App() {
         {/* <div className="others">페이지 내용</div> */}
         
         <Routes>
-          {/* home 페이지 */}
-          <Route path="/" element={<Home/>} />
+          {/* Order 페이지 (홈 페이지, 첫 시작 페이지) */}
+          <Route path="/" element={<Order/>} />
 
-          {/* Order 페이지 */}
-          <Route path="/order" element={<Order/>} />
+          {/* OrderList 페이지 */}
+          <Route path="/orderList" element={<OrderList/>} />
+
+          {/* MenuManagement 페이지 */}
+          <Route path="/menuManagement" element={<MenuManagement/>} />
+
         </Routes>
 
       </div>

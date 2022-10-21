@@ -9,7 +9,7 @@ function Topbar(){
                     <span className="logo">POS 시스템</span>
                 </div>
                 
-                <div className="topRight">right</div>
+                <div className="topRight">Topbar right</div>
             </div>
         </div>
     );
