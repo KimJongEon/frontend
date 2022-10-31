@@ -1,4 +1,6 @@
+/* eslint-disable */ // 터미널에 경고 메세지 안뜨게 해줌
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import ApiTestComponent from './ApiTestComponent';
 import Topbar from './components/topbar/Topbar';
 import Sidebar from './components/sidebar/Sidebar';
@@ -6,9 +8,11 @@ import Order from './pages/order/Order';
 import OrderList from './pages/orderList/OrderList';
 import MenuManagement from './pages/menuManagement/MenuManagement';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import {React} from 'react';
 
 function App() {
   let navigate = useNavigate();
+  
 
   return (
     <div className="App">
@@ -17,7 +21,7 @@ function App() {
       <Topbar></Topbar>
 
       {/* 고정 : Left Side bar */}
-      <div className="container">
+      <div className="appContainer">
         {/* <Sidebar></Sidebar> */}
         <Sidebar navigate={navigate}></Sidebar>
         {/* <Home></Home> */}
@@ -38,8 +42,8 @@ function App() {
 
       </div>
 
-      <h2>app.js입니다</h2>
-      <ApiTestComponent></ApiTestComponent>
+      {/* <h2>app.js입니다</h2>
+      <ApiTestComponent></ApiTestComponent> */}
 
     </div>
   );
