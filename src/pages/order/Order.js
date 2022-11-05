@@ -18,6 +18,9 @@ function Order() {
         axios.get('/api/test2')
             .then(res => {
                 if (res.data) {
+                    // 데이터 가져오기 성공하면
+                    // store.js에 저장하라고 dispatch 사용
+
                     // console.log(res.data); // 넘어오는지 값 확인
                     setProductList(res.data);
                 } else {

@@ -2,28 +2,36 @@
 
 // import { Button } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
-import {React, useState, useEffect} from 'react';
+import { React } from 'react';
 import './OrderRight.css';
-import axios from "axios";
+import { useDispatch, useSelector } from 'react-redux';
+import { pushProductCount } from '../../store.js';
 
-function OrderRight(props){
+function OrderRight(props) {
 
-    return(
+    let productCount = useSelector((state) => { return state.productCount })
+    
+
+    // Redux : store의 state 변경하기 위한 함수 - useDispatch
+    let dispatch = useDispatch()
+
+    return (
         <div className="orderRight">
-            {/* <div>{props.productListCopy[0].productName}</div> */}
-            {/* <div>{console.log(props.productList[0])}</div> */}
-            {/* <div>{console.log(props.productList[0].productName)}</div> */}
-            {/* <div>{console.log(props.productList[1].productName)}</div> */}
-            {/* <div>{console.log(props.productList[2].productName)}</div> */}
 
+            {/* <div>{console.log(props.productList)}</div> */}
 
-            <div>{console.log(props.productList)}</div>
             <div>
                 {
-                    props.productList.map((a, i) =>{
+                    props.productList.map((a, i) => {
                         return (
-                            <Button variant="primary" key={i}>
-                                {props.productList[i].productName} <br/>
+                            <Button variant="primary" key={i} onClick={() => {
+                                if (!productCount[i]) { //체크
+                                    dispatch(pushProductCount({ ...props.productList[i], count: 1 }))
+                                }
+                            }}>
+
+
+                                {props.productList[i].productName} <br />
                                 {props.productList[i].productPrice}
                             </Button>
                         ); //map return End
