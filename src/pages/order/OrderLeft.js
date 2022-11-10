@@ -37,6 +37,7 @@ function OrderLeft() {
                         productCount.map((a, i) => {
                             return (
                                 <tr key={i}>
+                                    {/* {console.log(productCount[i])} */}
                                     <td>{productCount[i].productName}</td>
                                     <td>
                                         {/* 수량 마이너스 버튼 */}

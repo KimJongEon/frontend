@@ -7,9 +7,7 @@ let productCount = createSlice({
     
     // 값
     initialState : 
-        [
-        
-        ],
+        [],
 
     // state 수정 함수
     reducers :{
