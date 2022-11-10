@@ -42,14 +42,11 @@ function OrderLeft() {
                                     <td>
                                         {/* 수량 마이너스 버튼 */}
                                         <Button variant="primary" onClick={() => {
-
                                             let productIdx = productCount[i].productIdx
                                             let productCountData = productCount[i].count
 
                                             if (productCountData > 1) {
                                                 let productCountUpdate = productCount.map((x) =>
-                                                    // console.log({...x})
-
                                                     x.productIdx === productIdx
                                                         ? { ...x, count: productCountData -= 1 }
                                                         : x
@@ -87,6 +84,17 @@ function OrderLeft() {
                         })
                     }
                 </tbody>
+            </Table>
+                
+            <h1>합계 테이블</h1>
+            <Table>
+                <thead>
+                    <tr>
+                        <th>받은 금액</th>
+                        <th>거스름돈</th>
+                        <th>합계</th>
+                    </tr>
+                </thead>
             </Table>
         </div>
     ); //return End

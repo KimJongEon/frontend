@@ -5,21 +5,17 @@ import Button from 'react-bootstrap/Button';
 import { React, useState } from 'react';
 import './OrderRight.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { pushProductCount } from '../../store.js';
+import { pushProductCount, changeProductCount } from '../../store.js';
 
 function OrderRight(props) {
 
     let productCount = useSelector((state) => { return state.productCount })
-    let [productCountCk, setProductCountCk] = useState();
 
     // Redux : store의 state 변경하기 위한 함수 - useDispatch
     let dispatch = useDispatch()
 
     return (
         <div className="orderRight">
-
-            {/* <div>{console.log(props.productList)}</div> */}
-
             <div>
                 {
                     props.productList.map((a, i) => {
@@ -29,7 +25,7 @@ function OrderRight(props) {
                                 if(productCount.length == 0){
                                     dispatch(pushProductCount({ ...a, count: 1 }))
                                 }else{ // productCount 배열 길이가 0이 아니면 데이터 존재
-                                    
+
                                     /* findProductCount : productCount productIdx와 선택한 데이터(a.productIdx)와 일치하는 데이터만 반환 */
                                     let findProductCount = productCount.filter(productCountData => productCountData.productIdx == a.productIdx)
 
@@ -41,10 +37,17 @@ function OrderRight(props) {
                                     if(findProductCount.length == 0){
                                         dispatch(pushProductCount({ ...a, count: 1 }))
                                     }
+                                    
+                                    /* 메뉴 클릭시 개수 증가 기능 구현 미정 */
+                                    // else if(findProductCount.length == 1){
+                                    //     console.log(productCount)
+                                    //     // console.log(findProductCount[0].count)
+                                    //     // dispatch(changeProductCount() )
+                                    // }
                                 }
                             }}>
-                                {props.productList[i].productName} <br />
-                                {props.productList[i].productPrice}
+                                {props.productList[i].productName /*제품 명*/ } <br /> 
+                                {props.productList[i].productPrice /*제품 가격*/ }
                             </Button>
                         ); //map return End
                     })
