@@ -7,10 +7,13 @@ import './OrderRight.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { pushProductCount, changeProductCount } from '../../store.js';
 
-function OrderRight(props) {
+function OrderRight() {
 
     let productCount = useSelector((state) => { return state.productCount })
+    let productList = useSelector((state) => { return state.productList})
 
+    // console.log(test)
+    // console.log(props.productList)
     // Redux : store의 state 변경하기 위한 함수 - useDispatch
     let dispatch = useDispatch()
 
@@ -18,7 +21,7 @@ function OrderRight(props) {
         <div className="orderRight">
             <div>
                 {
-                    props.productList.map((a, i) => {
+                    productList.map((a, i) => {
                         return (
                             <Button variant="primary" key={i} onClick={() => {
                                 // productCount 배열 길이가 0이면 데이터가 없으니 데이터 삽입
@@ -46,8 +49,8 @@ function OrderRight(props) {
                                     // }
                                 }
                             }}>
-                                {props.productList[i].productName /*제품 명*/ } <br /> 
-                                {props.productList[i].productPrice /*제품 가격*/ }
+                                {productList[i].productName /*제품 명*/ } <br /> 
+                                {productList[i].productPrice /*제품 가격*/ }
                             </Button>
                         ); //map return End
                     })

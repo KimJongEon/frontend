@@ -12,7 +12,9 @@ function OrderLeft() {
 
     let totalPrice = productCount.map((x)=>{
         return (x.count * x.productPrice);
-    }).reduce((a, b)=> a + b, 0);
+    }).reduce((a, b)=> { // a : 누적 값, b : 현재 값
+        // console.log(a, b)
+        return (a + b)}, 0); // 0은 초기값
 
     // Redux : store의 state 변경하기 위한 함수 - useDispatch
     let dispatch = useDispatch();
@@ -21,7 +23,6 @@ function OrderLeft() {
     return (
         <>
             <div className="orderLeft">
-                {/* {console.log(productCount)} */}
                 <Table>
                     <thead>
                         <tr>
@@ -91,17 +92,8 @@ function OrderLeft() {
                 </Table>
                 
                 <h2>총 결제 금액 : {totalPrice}</h2>
-
-                {/* <h1>합계 테이블</h1>
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>받은 금액</th>
-                            <th>거스름돈</th>
-                            <th>합계</th>
-                        </tr>
-                    </thead>
-                </Table> */}
+                <Button>현금 결제</Button>
+                <Button>카드 결제</Button>
             </div>
 
         </>
