@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   // <React.StrictMode>
 
-  // Provider redux 사용을 위해 선언
+  // Provider : redux 사용을 위해 선언
   <Provider store={store}> 
     <BrowserRouter> {/* react-router-dom 사용 : BrowserRouter 선언 */}
       <App />

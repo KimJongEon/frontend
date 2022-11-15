@@ -1,19 +1,15 @@
 /* eslint-disable */ // 터미널에 경고 메세지 안뜨게 해줌
-import {React, useState} from 'react';
+import { React, useEffect } from 'react';
 import './menuManagement.css';
-import axios from "axios";
+import MenuLeft from './MenuLeft.js';
+import MenuRight from './MenuRight.js';
 
-function MenuManagement(){
-    let [menuList, setMenuList] = useState();
-
-
+function MenuManagement() {
     
-    return(
-        <div className="menuManagement">메뉴 관리 페이지, menuManagement 페이지
-        
-        
-        
-        
+    return (
+        <div className="menuManagement">
+            <MenuLeft></MenuLeft>
+            <MenuRight></MenuRight>
         </div>
     ); //return End
 }

@@ -1,3 +1,4 @@
 .menuManagement{
+    display: flex;
     flex:4;
 }
