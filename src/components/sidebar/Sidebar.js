@@ -21,7 +21,7 @@ function Sidebar(props){
 
                         <li className="sidebarListItem">
                             <TrendingUpIcon/> 
-                            <Link to="/orderList">주문내역</Link>
+                            <Link to="/orderHistory">주문내역</Link>
                             {/* <Link onClick={()=>{ props.navigate('/order') }}>Order</Link> */}
                         </li>
 

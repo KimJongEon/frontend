@@ -5,13 +5,13 @@ import ApiTestComponent from './ApiTestComponent';
 import Topbar from './components/topbar/Topbar';
 import Sidebar from './components/sidebar/Sidebar';
 import Order from './pages/order/Order';
-import OrderList from './pages/orderList/OrderList';
+import OrderHistory from './pages/orderHistory/OrderHistory';
 import MenuManagement from './pages/menuManagement/MenuManagement';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { React, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import axios from "axios";
-import { changeProductList } from './store.js';
+import { changeProductList, changeOrderHistory } from './store.js';
 
 function App() {
   let navigate = useNavigate();
@@ -23,20 +23,35 @@ function App() {
   //dispatch로 store에 데이터 저장
   //store에 저장한 데이터 꺼내와서 사용하면 됨
   useEffect(() => {
-    axios.get('/api/productList')
-      .then(res => {
-        if (res.data) {
-          // 데이터 가져오기 성공하면
-          // store.js에 저장하라고 dispatch 사용
+    axios
+      .all([axios.get('/api/productList'),
+      axios.get('/api/orderHistory')])
+      .then(
+        axios.spread((productList, orderHistory) => {
+          // productList data
+          if (productList.data) {
+            // 데이터 가져오기 성공하면
+            // store.js에 저장하라고 dispatch 사용
+            console.log(productList.data); // 넘어오는지 값 확인
+            dispatch(changeProductList(productList.data));
+          } else {
+            console.log("productList 데이터 없음")
+          }
 
-          // console.log(res.data); // 넘어오는지 값 확인
-          dispatch(changeProductList(res.data));
-
-        } else {
-          console.log("nono")
-        }
-      })
-  }, []);
+          // orderHistory data
+          if (orderHistory.data) {
+            console.log(orderHistory.data);
+            dispatch(changeOrderHistory(orderHistory.data));
+          } else {
+            console.log("orderHistory 데이터 없음")
+          }
+        })
+      ) // then END
+      .catch(error => {
+        console.log("에러 발생")
+        console.log(error)
+      }) // catch END
+  }, []); // useEffect END
 
   return (
     <div className="App">
@@ -56,8 +71,8 @@ function App() {
           {/* Order 페이지 (홈 페이지, 첫 시작 페이지) */}
           <Route path="/" element={<Order />} />
 
-          {/* OrderList 페이지 */}
-          <Route path="/orderList" element={<OrderList />} />
+          {/* OrderHistory 페이지 */}
+          <Route path="/orderHistory" element={<OrderHistory />} />
 
           {/* MenuManagement 페이지 */}
           <Route path="/menuManagement" element={<MenuManagement />} />
