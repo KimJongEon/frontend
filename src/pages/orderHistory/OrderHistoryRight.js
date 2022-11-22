@@ -9,7 +9,7 @@ function OrderHistoryRight(){
 
     // 결제 한 총 금액
     let tatalPrice = 
-    orderHistoryDetail.length > 0
+    orderHistoryDetail.length > 0 //orderHistoryDetail에 데이터가 있을 때
     ? orderHistoryDetail.map((x)=>{
         return (x.productCount * x.productPrice);
     }).reduce((a, b)=>{// a : 누적 값, b : 현재 값

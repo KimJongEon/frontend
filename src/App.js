@@ -32,7 +32,7 @@ function App() {
           if (productList.data) {
             // 데이터 가져오기 성공하면
             // store.js에 저장하라고 dispatch 사용
-            console.log(productList.data); // 넘어오는지 값 확인
+            // console.log(productList.data); // 넘어오는지 값 확인
             dispatch(changeProductList(productList.data));
           } else {
             console.log("productList 데이터 없음")

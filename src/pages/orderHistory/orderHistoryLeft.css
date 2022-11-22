@@ -1,3 +1,7 @@
 .orderHistoryLeft{
     flex:1;
 }
+
+.orderHistoryLeftTable{
+    cursor: pointer;
+}

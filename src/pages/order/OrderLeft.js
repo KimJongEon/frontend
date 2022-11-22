@@ -5,14 +5,13 @@ import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 import { pushOrderList, changeOrderList } from '../../store.js';
-import { CatchingPokemonSharp } from '@mui/icons-material';
 import axios from 'axios';
 
 
 function OrderLeft() {
     let orderList = useSelector((state) => { return state.orderList });
     
-    // 결제 총 금액
+    // 총 결제 금액
     let totalPrice = orderList.map((x) => {
         return (x.count * x.productPrice);
     }).reduce((a, b) => { // a : 누적 값, b : 현재 값
@@ -102,6 +101,7 @@ function OrderLeft() {
                 <Button onClick={() => {
                     let orderListCopy = Object.values({ ...orderList });
                     // orderList.unshift({ paymentType: 'cash' }) // 배열 0번째 : 현금 결제 요소 추가
+                    
                     console.log(orderListCopy)
                     console.log(totalPrice)
                     axios.post(
