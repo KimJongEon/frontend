@@ -1,3 +1,11 @@
 .orderHistoryRight{
     flex:1;
 }
+
+.totalPriceDiv{
+    text-align : center;
+}
+
+.orderHistoryRightTable{
+    text-align : center;
+}

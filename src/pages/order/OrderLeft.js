@@ -10,7 +10,7 @@ import axios from 'axios';
 
 function OrderLeft() {
     let orderList = useSelector((state) => { return state.orderList });
-    
+
     // 총 결제 금액
     let totalPrice = orderList.map((x) => {
         return (x.count * x.productPrice);
@@ -26,7 +26,7 @@ function OrderLeft() {
     return (
         <>
             <div className="orderLeft">
-                <Table striped bordered hover>
+                <Table className="orderListTable" striped bordered hover>
                     <thead>
                         <tr>
                             <th>상품 이름</th>
@@ -50,7 +50,7 @@ function OrderLeft() {
                                         <td>{orderList[i].productName}</td>
                                         <td>
                                             {/* 수량 마이너스 버튼 */}
-                                            <Button variant="primary" onClick={() => {
+                                            <Button variant="danger" onClick={() => {
                                                 let productIdx = orderList[i].productIdx
                                                 let orderListData = orderList[i].count
 
@@ -86,7 +86,7 @@ function OrderLeft() {
                                         <td>{orderList[i].productPrice}</td>
 
                                         {/* 상품 총 금액 */}
-                                        <td>{orderList[i].count * orderList[i].productPrice}</td>
+                                        <td>{(orderList[i].count * orderList[i].productPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
                                     </tr>
                                 ); //return END
                             })
@@ -94,60 +94,77 @@ function OrderLeft() {
                     </tbody>
                 </Table>
 
+                <div className="totalPriceDiv">
+                    <h2>총 결제 금액 : {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h2>        
+                </div>
                 
-                <h2>총 결제 금액 : {totalPrice}</h2>
 
                 {/* 현금 결제 버튼 */}
-                <Button onClick={() => {
+                <Button className="paymentCash" onClick={() => {
                     let orderListCopy = Object.values({ ...orderList });
-                    // orderList.unshift({ paymentType: 'cash' }) // 배열 0번째 : 현금 결제 요소 추가
-                    
                     console.log(orderListCopy)
                     console.log(totalPrice)
-                    axios.post(
-                        "/api/paymentCash", // url 주소
-                        orderListCopy // 보낼 데이터
-                    )
-                        .then(res => {
-                            console.log(res)
-                            if (res.data == 1) {
-                                alert("주문이 완료 되었습니다.");
-                                location.reload();
-                            } else {
-                                alert("주문 실패");
-                            }
-                        })
-                        .catch(error => {
-                            console.log(error);
-                            alert("에러");
-                        })
-
+                    if (confirm("'현금결제'로주문완료 하시겠습니까?")) {
+                        //true
+                        axios.post(
+                            "/api/payment" + "/" + "cash",
+                            // "/api/paymentCash", // url 주소
+                            orderListCopy // 보낼 데이터
+                        )
+                            .then(res => {
+                                console.log(res)
+                                if (res.data == 1) {
+                                    alert("주문이 완료 되었습니다.");
+                                    dispatch(changeOrderList([]))
+                                } else {
+                                    alert("주문 실패");
+                                }
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                alert("에러");
+                            })
+                    } else {
+                        //false
+                        console.log("주문 취소")
+                    }
                 }}>현금 결제</Button>
 
                 {/* 카드 결제 버튼 */}
-                <Button onClick={() => {
+                <Button className="paymentCard" variant="success" onClick={() => {
                     let orderListCopy = Object.values({ ...orderList });
-                    // orderList.unshift({ paymentType: 'card' }) // 배열 0번째 : 카드 결제 요소 추가
                     console.log(orderListCopy)
                     console.log(totalPrice)
-                    axios.post(
-                        "/api/paymentCard", // url 주소
-                        orderListCopy // 보낼 데이터
-                    )
-                        .then(res => {
-                            console.log(res)
-                            if (res.data == 1) {
-                                alert("주문이 완료 되었습니다.");
-                                location.reload();
-                            } else {
-                                alert("주문 실패");
-                            }
-                        })
-                        .catch(error => {
-                            console.log(error)
-                            alert("에러")
-                        })
+
+                    if (confirm("'카드결제'로주문완료 하시겠습니까?")) {
+                        //true
+                        axios.post(
+                            "/api/payment" + "/" + "card",
+                            // "/api/paymentCash", // url 주소
+                            orderListCopy // 보낼 데이터
+                        )
+                            .then(res => {
+                                console.log(res)
+                                if (res.data == 1) {
+                                    alert("주문이 완료 되었습니다.");
+                                    dispatch(changeOrderList([]))
+                                } else {
+                                    alert("주문 실패");
+                                }
+                            })
+                            .catch(error => {
+                                console.log(error);
+                                alert("에러");
+                            })
+                    } else {
+                        //false
+                        console.log("주문 취소")
+                    }
                 }}>카드 결제</Button>
+
+                <Button className="orderRefresh" variant="danger" onClick={()=>{
+                    dispatch(changeOrderList([]))
+                }}>주문 초기화</Button>
             </div>
         </>
     ); //return End

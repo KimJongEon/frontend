@@ -58,7 +58,7 @@ function OrderHistoryLeft() {
                                             : null
                                         )
                                     }</td>
-                                    <td>{orderHistory[i].orderPrice}</td>
+                                    <td>{orderHistory[i].orderPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
                                     
                                 </tr>
                             ); // orderHistory return END

@@ -23,7 +23,7 @@ function OrderRight() {
                 {
                     productList.map((a, i) => {
                         return (
-                            <Button variant="primary" key={i} onClick={() => {
+                            <Button className="productList" variant="primary" key={i} onClick={() => {
                                 // orderList 배열 길이가 0이면 데이터가 없으니 데이터 삽입
                                 if(orderList.length == 0){
                                     dispatch(pushOrderList({ ...a, count: 1 }))

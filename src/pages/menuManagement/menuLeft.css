@@ -1,3 +1,7 @@
 .menuLeft{
     flex:1;
 }
+
+.productListTable{
+    text-align : center;
+}

@@ -20,7 +20,7 @@ function OrderHistoryRight(){
 
     return(
         <div className="orderHistoryRight">
-            <Table striped bordered hover>
+            <Table className="orderHistoryRightTable" striped bordered hover>
                 <thead>
                     <tr>
                         <th>상세 번호</th>
@@ -43,7 +43,7 @@ function OrderHistoryRight(){
                                     <td>{orderHistoryDetail[i].productName } </td>
                                     <td>{orderHistoryDetail[i].productCount } </td>
                                     <td>{orderHistoryDetail[i].productPrice } </td>
-                                    <td>{orderHistoryDetail[i].productCount * orderHistoryDetail[i].productPrice } </td>
+                                    <td>{ (orderHistoryDetail[i].productCount * orderHistoryDetail[i].productPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') } </td>
                                 </tr>
                             ); // orderHistoryDetail return END
                         }) // orderHistoryDetail map END
@@ -52,8 +52,10 @@ function OrderHistoryRight(){
                     }
                 </tbody>
             </Table>
-                
-            <h2>총 결제 금액 : {tatalPrice}</h2>
+
+            <div className="totalPriceDiv">
+                <h2>총 결제 금액 : {tatalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}원</h2>
+            </div>
         </div>
     ); // return END
 } // function END

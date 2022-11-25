@@ -1,3 +1,9 @@
 .orderRight{
     flex:1;
 }
+.productList{
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem;
+    font-size: 1.5rem;
+    width: 10rem;
+    height: 9rem;
+}
