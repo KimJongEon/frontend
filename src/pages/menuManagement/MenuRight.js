@@ -17,27 +17,25 @@ function MenuRight() {
 
     return (
         <div className="menuRight">
-
-            <div>
-                <InputGroup className="mb-3">
-                    <InputGroup.Text id="basic-addon1">상품 이름</InputGroup.Text>
+            <div className="inputDiv">
+                <InputGroup className="mb-3" >
+                    <InputGroup.Text id="productName" className="inputGroup">상품 이름</InputGroup.Text>
                     <Form.Control
+                        className="productInputForm"
                         ref={productNameRef} // Ref 사용
                         placeholder="상품 이름"
-                        aria-label="상품 이름"
-                        aria-describedby="basic-addon1"
                     />
                 </InputGroup>
 
-                <InputGroup className="mb-3 productPrice">
-                    <InputGroup.Text id="basic-addon1">상품 가격</InputGroup.Text>
+                <InputGroup className="mb-3">
+                    <InputGroup.Text id="productPrice" className="inputGroup">상품 가격</InputGroup.Text>
                     <Form.Control
+                        className="productInputForm"
                         ref={productPriceRef} // Ref 사용
                         placeholder="상품 가격"
-                        aria-label="상품 가격"
-                        aria-describedby="basic-addon1"
                     />
                 </InputGroup>
+
 
                 <Button className="productAddButton" onClick={() => {
                     console.log(productNameRef.current.value)
@@ -51,8 +49,8 @@ function MenuRight() {
                         '/api/registrationProduct', // url 주소
                         editedProductList // 보낼 데이터
                     )
-                        .then( res => {
-                            if(res.data){ // 결과가 true
+                        .then(res => {
+                            if (res.data) { // 결과가 true
                                 dispatch(changeProductList(res.data))
                             }
                         })
@@ -60,6 +58,7 @@ function MenuRight() {
                     console.log(editedProductList)
                 }}
                 > 추가 </Button>
+
             </div>
         </div>
     );// END

@@ -4,4 +4,9 @@
 
 .productListTable{
     text-align : center;
+    font-size: 1.5rem;
+}
+
+.menuDeleteButton{
+    font-size: 1.5rem;
 }

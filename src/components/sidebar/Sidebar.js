@@ -1,8 +1,7 @@
+/* eslint-disable */ // 터미널에 경고 메세지 안뜨게 해줌
 import React from 'react';
 import './sidebar.css';
-import HomeWorkIcon from '@mui/icons-material/HomeWork';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import { BsFillBasket3Fill, BsListUl, BsArrowRightSquareFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 
 
@@ -11,22 +10,22 @@ function Sidebar(props){
         <div className="sidebar">
             <div className="sidebarWrapper">
                 <div className="sidebarMenu">
-                    <h3 className="sidebarTitle">관리</h3>
+                    <h3 className="sidebarTitle">주문 및 관리</h3>
                     <ul className="sidebarList">
                         <li className="sidebarListItem">
-                            <HomeWorkIcon/>
+                            <BsFillBasket3Fill/>
                             <Link to="/">주문</Link>
                             {/* <Link onClick={()=>{ props.navigate('/') }}>Home</Link> */}
                         </li>
 
                         <li className="sidebarListItem">
-                            <TrendingUpIcon/> 
+                            <BsListUl/> 
                             <Link to="/orderHistory">주문내역</Link>
                             {/* <Link onClick={()=>{ props.navigate('/order') }}>Order</Link> */}
                         </li>
 
                         <li className="sidebarListItem">
-                            <MonetizationOnIcon/>
+                            <BsArrowRightSquareFill/>
                             <Link to="/menuManagement">메뉴관리</Link>
                         </li>
 

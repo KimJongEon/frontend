@@ -20,7 +20,7 @@ function MenuLeft() {
                         {/* <th>상품 번호</th> */}
                         <th>이름</th>
                         <th>가격</th>
-                        <th>버튼</th>
+                        <th>삭제</th>
                     </tr>
                 </thead>
 
@@ -35,7 +35,7 @@ function MenuLeft() {
                                     <td>{(productList[i].productPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</td>
                                     <td>
                                         {/* 메뉴 삭제 버튼 */}
-                                        <Button variant="danger" onClick={() => {
+                                        <Button variant="danger" className="menuDeleteButton" onClick={() => {
                                             if (confirm("정말 삭제하시겠습니까?")) {
                                                 //true
                                                 let productIdxCopy = productList[i].productIdx

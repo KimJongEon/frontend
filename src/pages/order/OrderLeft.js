@@ -65,7 +65,7 @@ function OrderLeft() {
                                             }}>-</Button>
 
                                             {/* 수량 */}
-                                            {orderList[i].count}
+                                            &nbsp;&nbsp;{orderList[i].count}&nbsp;&nbsp;
 
                                             {/* 수량 플러스 버튼 */}
                                             <Button variant="primary" onClick={() => {
