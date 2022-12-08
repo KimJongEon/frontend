@@ -23,46 +23,35 @@ function App() {
   //dispatch로 store에 데이터 저장
   //store에 저장한 데이터 꺼내와서 사용하면 됨
   useEffect(() => {
-    axios.get('/api/productList')
-      .then(productList => {
-        if (productList.data) {
-          // 데이터 가져오기 성공하면
-          // store.js에 저장하라고 dispatch 사용
-          // console.log(productList.data); // 넘어오는지 값 확인
-          dispatch(changeProductList(productList.data));
-        } else {
-          console.log("productList 데이터 없음")
-        }
-      })
 
-    // axios
-    //   .all([axios.get('/api/productList'),
-    //   axios.get('/api/orderHistory')])
-    //   .then(
-    //     axios.spread((productList, orderHistory) => {
-    //       // productList data
-    //       if (productList.data) {
-    //         // 데이터 가져오기 성공하면
-    //         // store.js에 저장하라고 dispatch 사용
-    //         // console.log(productList.data); // 넘어오는지 값 확인
-    //         dispatch(changeProductList(productList.data));
-    //       } else {
-    //         console.log("productList 데이터 없음")
-    //       }
+    axios
+      .all([axios.get('/api/productList'),
+      axios.get('/api/orderHistory')])
+      .then(
+        axios.spread((productList, orderHistory) => {
+          // productList data
+          if (productList.data) {
+            // 데이터 가져오기 성공하면
+            // store.js에 저장하라고 dispatch 사용
+            // console.log(productList.data); // 넘어오는지 값 확인
+            dispatch(changeProductList(productList.data));
+          } else {
+            console.log("productList 데이터 없음")
+          }
 
-    //       // orderHistory data
-    //       if (orderHistory.data) {
-    //         console.log(orderHistory.data);
-    //         dispatch(changeOrderHistory(orderHistory.data));
-    //       } else {
-    //         console.log("orderHistory 데이터 없음")
-    //       }
-    //     })
-    //   ) // then END
-    //   .catch(error => {
-    //     console.log("에러 발생")
-    //     console.log(error)
-    //   }) // catch END
+          // orderHistory data
+          if (orderHistory.data) {
+            console.log(orderHistory.data);
+            dispatch(changeOrderHistory(orderHistory.data));
+          } else {
+            console.log("orderHistory 데이터 없음")
+          }
+        })
+      ) // then END
+      .catch(error => {
+        console.log("에러 발생")
+        console.log(error)
+      }) // catch END
 
 
   }, []); // useEffect END

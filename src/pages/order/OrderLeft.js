@@ -4,7 +4,7 @@ import './orderLeft.css';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-import { pushOrderList, changeOrderList } from '../../store.js';
+import { pushOrderList, changeOrderList, changeOrderHistory } from './../../store.js';
 import axios from 'axios';
 
 
@@ -95,9 +95,9 @@ function OrderLeft() {
                 </Table>
 
                 <div className="totalPriceDiv">
-                    <h2>총 결제 금액 : {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h2>        
+                    <h2>총 결제 금액 : {totalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')}</h2>
                 </div>
-                
+
 
                 {/* 현금 결제 버튼 */}
                 <Button className="paymentCash" onClick={() => {
@@ -116,6 +116,21 @@ function OrderLeft() {
                                 if (res.data == 1) {
                                     alert("주문이 완료 되었습니다.");
                                     dispatch(changeOrderList([]))
+
+                                    axios.get('/api/orderHistory')
+                                        .then(orderHistory => {
+
+                                            if (orderHistory.data) {
+                                                console.log(orderHistory.data);
+                                                dispatch(changeOrderHistory(orderHistory.data));
+                                            } else {
+                                                console.log("orderHistory 데이터 없음")
+                                            }
+                                        }).catch(error => {
+                                            console.log("orderHistory API 에러 발생")
+                                            console.log(error)
+                                        }) // catch END
+
                                 } else {
                                     alert("주문 실패");
                                 }
@@ -148,6 +163,21 @@ function OrderLeft() {
                                 if (res.data == 1) {
                                     alert("주문이 완료 되었습니다.");
                                     dispatch(changeOrderList([]))
+
+                                    axios.get('/api/orderHistory')
+                                        .then(orderHistory => {
+
+                                            if (orderHistory.data) {
+                                                console.log(orderHistory.data);
+                                                dispatch(changeOrderHistory(orderHistory.data));
+                                            } else {
+                                                console.log("orderHistory 데이터 없음")
+                                            }
+                                        }).catch(error => {
+                                            console.log("orderHistory API 에러 발생")
+                                            console.log(error)
+                                        }) // catch END
+
                                 } else {
                                     alert("주문 실패");
                                 }
@@ -162,7 +192,7 @@ function OrderLeft() {
                     }
                 }}>카드 결제</Button>
 
-                <Button className="orderRefresh" variant="danger" onClick={()=>{
+                <Button className="orderRefresh" variant="danger" onClick={() => {
                     dispatch(changeOrderList([]))
                 }}>주문 초기화</Button>
             </div>

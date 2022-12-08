@@ -3,13 +3,8 @@ import React from 'react';
 import './sidebar.css';
 import { BsFillBasket3Fill, BsListUl, BsArrowRightSquareFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
-import { useDispatch } from 'react-redux';
-import { changeOrderHistory } from './../../store.js';
 
 function Sidebar(props) {
-    // Redux : store의 state 변경하기 위한 함수 - useDispatch
-    let dispatch = useDispatch();
     
     return (
         <div className="sidebar">
@@ -25,23 +20,7 @@ function Sidebar(props) {
 
                         <li className="sidebarListItem">
                             <BsListUl />
-                            <Link to="/orderHistory" onClick={() => {
-                                console.log("test")
-
-                                axios.get('/api/orderHistory')
-                                    .then(orderHistory => {
-
-                                        if (orderHistory.data) {
-                                            console.log(orderHistory.data);
-                                            dispatch(changeOrderHistory(orderHistory.data));
-                                        } else {
-                                            console.log("orderHistory 데이터 없음")
-                                        }
-                                    })
-
-                            }}>
-
-                                주문내역</Link>
+                            <Link to="/orderHistory">주문내역</Link>
                             {/* <Link onClick={()=>{ props.navigate('/order') }}>Order</Link> */}
                         </li>
 
