@@ -39,7 +39,7 @@ function MenuLeft() {
                                             if (confirm("정말 삭제하시겠습니까?")) {
                                                 //true
                                                 let productIdxCopy = productList[i].productIdx
-                                                axios.post(
+                                                axios.delete(
                                                     "/api/deletionProduct" + "/" + productIdxCopy
                                                 )
                                                     .then(res => {
